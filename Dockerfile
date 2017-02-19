@@ -11,9 +11,23 @@ ENV REFRESHED_AT=2016-09-28 \
 RUN mkdir ${HOME} && \
     chown -R node:node ${HOME}
 
-# Run app with PM2
-RUN npm install -g pm2
-ENTRYPOINT ["pm2 start --no-daemon"]
+# Update NPM and install PM2
+RUN npm install -g pm2 && \
+    npm cache clean
+
+# Cleanup container
+RUN rm -rf \
+    /usr/share/man \
+    /tmp/* /var/cache/apk/* \
+    /root/.npm \
+    /root/.node-gyp \
+    /root/.gnupg \
+    /usr/lib/node_modules/npm/man \
+    /usr/lib/node_modules/npm/doc \
+    /usr/lib/node_modules/npm/html \
+    /usr/lib/node_modules/npm/scripts
+
 WORKDIR ${HOME}
 
-CMD ["static/server.server.js"]
+# Start apps under PM2 supervision
+CMD ["pm2 start --no-daemon static/server.server.js"]
