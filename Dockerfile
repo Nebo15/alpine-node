@@ -2,7 +2,7 @@ FROM node:6.9-alpine
 
 MAINTAINER Nebo#15 support@nebo15.com
 
-ENV REFRESHED_AT=2016-09-28 \
+ENV REFRESHED_AT=2017-02-19 \
     NODE_VERSION=6.9.5 \
     TERM=xterm \
     HOME=/app
