@@ -30,4 +30,5 @@ RUN rm -rf \
 WORKDIR ${HOME}
 
 # Start apps under PM2 supervision
+# TODO: Replace with http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/
 CMD ["pm2 start --log-type json --merge-logs --no-daemon static/server.server.js"]
